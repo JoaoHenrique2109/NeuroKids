@@ -1,4 +1,4 @@
 package com.example.NeuroKids.repository;
 
-public class CriancaRepository {
+public class AtividadeRepository {
 }
