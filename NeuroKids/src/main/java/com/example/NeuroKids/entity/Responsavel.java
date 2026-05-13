@@ -1,65 +1,55 @@
-package com.example.NeuroKids.model;
+package com.example.NeuroKids.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Responsavel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //Dados Pessois
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    private String telefone;
-
+    @Column(nullable = false, unique = true, length = 150)
     private String email;
 
-    // Um responsável pode ter várias crianças
-    @OneToMany(mappedBy = "responsavel")
-    private List<Crianca> criancas;
+    @Column(nullable = false, length = 20)
+    private String telefone;
 
+    @Column(nullable = false, length = 11, unique = true)
+    private String cpf;
 
-    // GETTERS E SETTERS
+    // Grau de parentesco com a criança: MÃE, PAI, AVO, TIO, TUTOR, OUTRO
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Parentesco parentesco;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private Boolean ativo = true;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "criado_em", updatable = false)
+    private LocalDateTime criadoEm;
 
-    public String getNome() {
-        return nome;
-    }
+    @Column(name = "atualizado_em")
+    private LocalDateTime atualizadoEm;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    // Um responsável pode ter múltiplos filhos na plataforma
+    @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL)
+    private List<Paciente> pacientes = new ArrayList<>();
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Crianca> getCriancas() {
-        return criancas;
-    }
-
-    public void setCriancas(List<Crianca> criancas) {
-        this.criancas = criancas;
+    public enum Parentesco {
+        MAE, PAI, AVO, TIO, TUTOR, OUTRO
     }
 }

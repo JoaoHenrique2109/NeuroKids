@@ -1,72 +1,71 @@
 package com.example.NeuroKids.entity;
+
 import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-// Define que essa classe será uma tabela no banco
 @Entity
-public class Crianca {
+@Table(name = "pacientes")//TIRAR ESSE TABLE DO CÓDIGO
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Paciente {
 
-    // Define chave primária
     @Id
-// incremento
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        // Nome da criança
-        private String nome;
+    @Column(nullable = false, length = 100)
+    private String nome;
 
-        // Data de nascimento
-        private LocalDate dataNascimento;
+    @Column(name = "data_nascimento", nullable = false)
+    private LocalDate dataNascimento;
 
-        // Diagnóstico da criança
-        private String diagnostico;
+    // Diagnóstico principal: TEA, TDAH, Dislexia, TDC, etc.
+    @Column(nullable = false, length = 100)
+    private String diagnostico;
 
-        // Relacionamento ManyToOne
-        // Muitas crianças podem ter um responsável
-        @ManyToOne
-        @JoinColumn(name = "responsavel_id")
-        private Responsavel responsavel;
+    // Informações adicionais sobre necessidades específicas
+    @Column(name = "necessidades_especificas", columnDefinition = "TEXT")
+    private String necessidadesEspecificas;
+
+    // Nível de suporte
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nivel_suporte", nullable = false)
+    private NivelSuporte nivelSuporte;
+
+    @Column(nullable = false)
+    private Boolean ativo = true;
+
+    @Column(name = "criado_em", updatable = false)
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado_em")
+    private LocalDateTime atualizadoEm;
 
 
-        // GETTERS E SETTERS
+    // Cada paciente tem um responsável
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "responsavel_id", nullable = false)
+    private Responsavel responsavel;
 
-        public Long getId() {
-            return id;
-        }
+    // Paciente pode ter vários terapeutas
+    @ManyToMany
+    @JoinTable(
+            name = "paciente_terapeuta",
+            joinColumns = @JoinColumn(name = "paciente_id"),
+            inverseJoinColumns = @JoinColumn(name = "terapeuta_id")
+    )
+    private List<Terapeuta> terapeutas = new ArrayList<>();
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    // Histórico de atividades realizadas
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProgressoAtividade> progressos = new ArrayList<>();
 
-        public String getNome() {
-            return nome;
-        }
-
-        public void setNome(String nome) {
-            this.nome = nome;
-        }
-
-        public LocalDate getDataNascimento() {
-            return dataNascimento;
-        }
-
-        public void setDataNascimento(LocalDate dataNascimento) {
-            this.dataNascimento = dataNascimento;
-        }
-
-        public String getDiagnostico() {
-            return diagnostico;
-        }
-
-        public void setDiagnostico(String diagnostico) {
-            this.diagnostico = diagnostico;
-        }
-
-        public Responsavel getResponsavel() {
-            return responsavel;
-        }
-
-        public void setResponsavel(Responsavel responsavel) {
-            this.responsavel = responsavel;
-        }
+    public enum NivelSuporte {NIVEL_1, NIVEL_2, NIVEL_3}
 }

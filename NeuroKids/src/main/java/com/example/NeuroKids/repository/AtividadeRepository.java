@@ -1,4 +1,35 @@
 package com.example.NeuroKids.repository;
 
-public class AtividadeRepository {
+import com.example.NeuroKids.entity.Atividade;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface AtividadeRepository
+        extends JpaRepository<Atividade, Long> {
+
+    @Query(value = """
+            SELECT * FROM atividades
+            WHERE ativa = true
+            """, nativeQuery = true)
+    List<Atividade> buscarAtividadesAtivas();
+
+    @Query(value = """
+            SELECT * FROM atividades
+            WHERE dificuldade = :dificuldade
+            """, nativeQuery = true)
+    List<Atividade> buscarPorDificuldade(String dificuldade);
+
+    @Query(value = """
+            SELECT * FROM atividades
+            WHERE tipo = :tipo
+            """, nativeQuery = true)
+    List<Atividade> buscarPorTipo(String tipo);
+
+    @Query(value = """
+            SELECT * FROM atividades
+            WHERE duracao_minutos <= :duracao
+            """, nativeQuery = true)
+    List<Atividade> buscarPorDuracao(Integer duracao);
 }
