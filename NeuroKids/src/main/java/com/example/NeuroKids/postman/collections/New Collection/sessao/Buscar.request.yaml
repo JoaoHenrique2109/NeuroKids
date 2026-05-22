@@ -1,0 +1,5 @@
+$kind: http-request
+name: Buscar
+url: http://localhost:8080/sessoes/1
+method: GET
+order: 4407442969658465

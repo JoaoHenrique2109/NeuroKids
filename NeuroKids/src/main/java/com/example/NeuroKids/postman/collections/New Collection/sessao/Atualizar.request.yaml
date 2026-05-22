@@ -1,0 +1,29 @@
+$kind: http-request
+url: http://localhost:8080/sessoes/1
+method: PUT
+body:
+  type: json
+  content: "\r
+
+    {\r
+
+    \  \"pacienteId\": 1,\r
+
+    \  \"terapeutaId\": 1,\r
+
+    \  \"dataSessao\": \"2026-05-21\",\r
+
+    \  \"horaInicio\": \"11:00\",\r
+
+    \  \"tipo\": \"PRESENCIAL\",\r
+
+    \  \"status\": \"AGENDADA\",\r
+
+    \  \"relatoClinico\": \"Criança com medo\",\r
+
+    \  \"metas\": \"destravar comunicação com os pais\",\r
+
+    \  \"evolucao\": \"conseguiu contar sobre sua vida\"\r
+
+    }"
+order: 4432184805455685

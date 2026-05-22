@@ -4,6 +4,8 @@ package com.example.NeuroKids.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
@@ -48,9 +50,11 @@ public class Comunicado {
     @Column(name = "visualizado_em")
     private LocalDateTime visualizadoEm;
 
+    @CreationTimestamp
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
+    @UpdateTimestamp
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 

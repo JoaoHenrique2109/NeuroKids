@@ -1,0 +1,30 @@
+$kind: http-request
+name: Atualizar
+url: http://localhost:8080/pacientes/1
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"dataNascimento\": \"2013-05-10\",\r
+
+    \    \"diagnostico\": \"TDAH\",\r
+
+    \    \"id\": 2,\r
+
+    \    \"idade\": \"13\",\r
+
+    \    \"responsavelId\": \"1\",\r
+
+    \     \"nivelSuporte\": \"NIVEL_1\",\r
+
+    \     \"necessidadesEspecificas\": \"ansiedade\",\r
+
+    \    \"nome\": \"Ana\",\r
+
+    \    \"nomeResponsavel\": \"solange\",\r
+
+    \    \"terapeutas\": [1]\r
+
+    }"
+order: 4478252007882123

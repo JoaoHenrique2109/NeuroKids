@@ -1,0 +1,5 @@
+$kind: http-request
+name: Atualizar
+url: http://localhost:8080/terapeutas/1
+method: PUT
+order: 3582657123929578

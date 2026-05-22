@@ -26,10 +26,5 @@ public interface AtividadeRepository
             WHERE tipo = :tipo
             """, nativeQuery = true)
     List<Atividade> buscarPorTipo(String tipo);
-
-    @Query(value = """
-            SELECT * FROM atividades
-            WHERE duracao_minutos <= :duracao
-            """, nativeQuery = true)
-    List<Atividade> buscarPorDuracao(Integer duracao);
 }
+

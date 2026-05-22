@@ -1,0 +1,29 @@
+$kind: http-request
+url: http://localhost:8080/responsavel/1
+method: DELETE
+body:
+  type: json
+  content: "{\"ativo\": false,\r
+
+    \        \"cpf\": \"15378185469\",\r
+
+    \        \"criadoEm\": null,\r
+
+    \        \"email\": \"KASABRASIL@GMAIL.COM\",\r
+
+    \        \"id\": 1,\r
+
+    \        \"nome\": \"solange\",\r
+
+    \        \"pacientes\": [\r
+
+    \            \"Ana\"\r
+
+    \        ],\r
+
+    \        \"parentesco\": \"MAE\",\r
+
+    \        \"telefone\": \"819949265\"\r
+
+    \    }"
+order: 4367127158691452

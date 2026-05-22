@@ -23,7 +23,6 @@ public class SessaoRequestDTO {
     @NotNull(message = "Hora de início é obrigatória")
     private LocalTime horaInicio;
 
-    private LocalTime horaFim;
 
     @NotNull(message = "Tipo da sessão é obrigatório")
     private TipoSessao tipo;
@@ -37,5 +36,4 @@ public class SessaoRequestDTO {
 
     private String evolucao;
 
-    private String proximosPassos;
 }

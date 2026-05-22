@@ -1,8 +1,11 @@
 package com.example.NeuroKids.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +42,16 @@ public class Responsavel {
     @Column(nullable = false)
     private Boolean ativo = true;
 
+    @CreationTimestamp
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
+    @UpdateTimestamp
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
     // Um responsável pode ter múltiplos filhos na plataforma
+    @JsonIgnore
     @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL)
     private List<Paciente> pacientes = new ArrayList<>();
 

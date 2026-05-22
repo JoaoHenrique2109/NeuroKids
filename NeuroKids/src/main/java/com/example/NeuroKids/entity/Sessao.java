@@ -1,8 +1,11 @@
 package com.example.NeuroKids.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
@@ -20,13 +23,14 @@ public class Sessao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Paciente paciente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "terapeuta_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Terapeuta terapeuta;
 
     @Column(name = "data_sessao", nullable = false)
@@ -35,12 +39,6 @@ public class Sessao {
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
 
-    @Column(name = "hora_fim")
-    private LocalTime horaFim;
-
-    // Duração efetiva em minutos (calculada ou informada)
-    @Column(name = "duracao_minutos")
-    private Integer duracaoMinutos;
 
     // Tipo: PRESENCIAL, ONLINE, DOMICILIAR
     @Enumerated(EnumType.STRING)
@@ -64,15 +62,14 @@ public class Sessao {
     @Column(columnDefinition = "TEXT")
     private String evolucao;
 
-    // Plano para próximas sessões
-    @Column(name = "proximos_passos", columnDefinition = "TEXT")
-    private String proximosPassos;
 
+    @CreationTimestamp
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
+    @UpdateTimestamp
     @Column(name = "atualizado_em")
-    private LocalDateTime atualizadoEm;
+    private LocalDate atualizadoEm;
 
 
     public enum TipoSessao {

@@ -1,0 +1,26 @@
+$kind: http-request
+name: Criar
+url: http://localhost:8080/pacientes
+method: POST
+body:
+  type: json
+  content: "{\"nome\": \"Jorge\",\r
+
+    \  \"dataNascimento\": \"2020-05-02\",\r
+
+    \  \"idade\": 6,\r
+
+    \  \"diagnostico\": \"TDAH\",\r
+
+    \  \"necessidadesEspecificas\": \"DELETE\",\r
+
+    \  \"nivelSuporte\": \"NIVEL_2\",\r
+
+    \  \"responsavelId\": 1,\r
+
+    \  \"terapeutasIds\": []\r
+
+    \r
+
+    }"
+order: 3634120608603243

@@ -1,0 +1,21 @@
+$kind: http-request
+name: CRIAR
+url: http://localhost:8080/atividades
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"titulo\": \"Encontre as Cores\",\r
+
+    \  \"descricao\": \"Atividade para estimular atenção visual e associação.\",\r
+
+    \  \"instrucoes\": \"Peça para a criança encontrar objetos da cor indicada no ambiente.\",\r
+
+    \  \"tipo\": \"DINAMICA\",\r
+
+    \  \"dificuldade\": \"FACIL\"\r
+
+    }"
+examples: .resources/CRIAR.resources/examples
+order: 1000

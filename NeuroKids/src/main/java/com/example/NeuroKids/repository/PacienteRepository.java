@@ -20,9 +20,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     List<Paciente> findByDiagnosticoContainingIgnoreCase(String diagnostico);
 
 
-    /**
-     * Busca pacientes pelo ID do responsável que estejam ativos.
-     */
     @Query("SELECT p FROM Paciente p WHERE p.responsavel.id = :responsavelId AND p.ativo = true")
     List<Paciente> findPacientesAtivosByResponsavel(@Param("responsavelId") Long responsavelId);
 
@@ -31,10 +28,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     List<Paciente> findPacientesByTerapeuta(@Param("terapeutaId") Long terapeutaId);
 
 
-    /**
-     * Retorna o ranking dos pacientes com mais atividades concluídas.
-     * Útil para gamificação e motivação.
-     */
+
     @Query(value = """
             SELECT p.id, p.nome, p.diagnostico,
                    COUNT(pa.id) AS total_atividades_concluidas
@@ -48,10 +42,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
             """, nativeQuery = true)
     List<Object[]> findRankingPacientesMaisAtivos(@Param("limite") int limite);
 
-    /**
-     * Busca pacientes que não realizaram nenhuma atividade nos últimos N dias.
-     * Útil para alertas de engajamento.
-     */
+
     @Query(value = """
             SELECT p.id, p.nome, p.diagnostico, MAX(pa.ultima_execucao) AS ultima_atividade
             FROM pacientes p

@@ -1,0 +1,8 @@
+$kind: http-request
+name: Buscar
+url: http://localhost:8080/responsavel/
+method: GET
+body:
+  type: json
+  content: ""
+order: 3684594693952659

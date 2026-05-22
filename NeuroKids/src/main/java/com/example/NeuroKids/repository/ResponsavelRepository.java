@@ -9,15 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Repositório JPA para a entidade Responsavel.
- */
+
 @Repository
 public interface ResponsavelRepository extends JpaRepository<Responsavel, Long> {
 
-    // ============================================================
-    // Queries derivadas
-    // ============================================================
 
     Optional<Responsavel> findByEmail(String email);
     Optional<Responsavel> findByCpf(String cpf);

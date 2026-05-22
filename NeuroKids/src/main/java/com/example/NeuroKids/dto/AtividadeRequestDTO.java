@@ -23,11 +23,4 @@ public class AtividadeRequestDTO {
     @NotNull(message = "Dificuldade é obrigatória")
     private Dificuldade dificuldade;
 
-    private Integer duracaoMinutos;
-
-    private String faixaEtaria;
-
-    private String indicadaPara;
-
-    private String urlImagem;
 }

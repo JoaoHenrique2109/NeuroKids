@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:8080/sessoes
+method: GET
+body:
+  type: json
+  content: ""
+order: 1779369065613

@@ -9,38 +9,67 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
-public interface TerapeutaRepository extends JpaRepository<Terapeuta, Long> {
+public interface TerapeutaRepository
+        extends JpaRepository<Terapeuta, Long> {
 
-
+    // Busca por email
     Optional<Terapeuta> findByEmail(String email);
 
-    Optional<Terapeuta> findByRegistroProfissional(String registro);
+    // Busca por registro profissional
+    Optional<Terapeuta> findByRegistroProfissional(
+            String registroProfissional
+    );
 
+    // Busca terapeutas ativos/inativos
     List<Terapeuta> findByAtivo(Boolean ativo);
-    List<Terapeuta> findByEspecialidade(Terapeuta.Especialidade especialidade);
+
+    // Busca por especialidade
+    List<Terapeuta> findByEspecialidade(
+            Terapeuta.Especialidade especialidade
+    );
+
+    // Verifica email existente
     boolean existsByEmail(String email);
-    boolean existsByRegistroProfissional(String registro);
 
+    // Verifica registro existente
+    boolean existsByRegistroProfissional(
+            String registroProfissional
+    );
 
-
-    @Query(value = """
-            SELECT * FROM terapeuta
-            WHERE especialidade = :especialidade
-            """, nativeQuery = true)
+    // Busca por especialidade
+    @Query("""
+            SELECT t
+            FROM Terapeuta t
+            WHERE t.especialidade = :especialidade
+            """)
     List<Terapeuta> buscarPorEspecialidade(
-            String especialidade);
+            @Param("especialidade")
+            Terapeuta.Especialidade especialidade
+    );
 
-    @Query(value = """
-            SELECT * FROM terapeuta
-            WHERE ativo = true
-            """, nativeQuery = true)
+    // Busca apenas terapeutas ativos
+    @Query("""
+            SELECT t
+            FROM Terapeuta t
+            WHERE t.ativo = true
+            """)
     List<Terapeuta> buscarTerapeutasAtivos();
 
-    @Query(value = """
-            SELECT * FROM terapeuta
-            WHERE nome LIKE %:nome%
-            """, nativeQuery = true)
-    List<Terapeuta> buscarPorNome(String nome);
+    // Busca por nome
+    @Query("""
+            SELECT t
+            FROM Terapeuta t
+            WHERE LOWER(t.nome)
+            LIKE LOWER(CONCAT('%', :nome, '%'))
+            """)
+    List<Terapeuta> buscarPorNome(
+            @Param("nome") String nome
+    );
+
+    // Busca terapeuta ativo por ID
+    Optional<Terapeuta> findByIdAndAtivo(
+            Long id,
+            Boolean ativo
+    );
 }

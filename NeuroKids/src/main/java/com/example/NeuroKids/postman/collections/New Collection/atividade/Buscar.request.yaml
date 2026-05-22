@@ -1,0 +1,26 @@
+$kind: http-request
+name: Buscar
+url: http://localhost:8080/atividades/
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \r
+
+    \r
+
+    \    \"titulo\": \"contato\",\r
+
+    \    \"descricao\": \"contato fisico\",\r
+
+    \    \"instrucoes\": \"fazer a interação\",\r
+
+    \    \"tipo\": \"EXERCICIO\",\r
+
+    \    \"dificuldade\": \"MEDIO\",\r
+
+    \    \"quantidadeProgressos\":\"3\" \r
+
+    }"
+order: 2599

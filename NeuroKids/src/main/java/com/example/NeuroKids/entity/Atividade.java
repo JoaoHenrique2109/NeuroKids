@@ -1,7 +1,10 @@
 package com.example.NeuroKids.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,32 +42,19 @@ public class Atividade {
     @Column(nullable = false, length = 20)
     private Dificuldade dificuldade;
 
-    // Duração
-    @Column(name = "duracao_minutos")
-    private Integer duracaoMinutos;
-
-    // Faixa etária recomendada
-    @Column(name = "faixa_etaria", length = 30)
-    private String faixaEtaria;
-
-    // Diagnósticos para os quais a atividade é especialmente indicada
-    @Column(name = "indicada_para", length = 200)
-    private String indicadaPara;
-
-    // URL da imagem ou thumbnail da atividade
-    @Column(name = "url_imagem", length = 500)
-    private String urlImagem;
 
     @Column(nullable = false)
     private Boolean ativa = true;
 
+    @CreationTimestamp
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
+    @UpdateTimestamp
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-
+    @JsonIgnore
     // Registros de progresso dos pacientes nesta atividade
     @OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProgressoAtividade> progressos = new ArrayList<>();

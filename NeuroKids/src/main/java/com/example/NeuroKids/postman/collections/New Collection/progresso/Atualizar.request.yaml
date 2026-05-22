@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:8080/progressos/1
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"pacienteId\": 1,\r
+
+    \  \"atividadeId\": 2,\r
+
+    \  \"status\": \"CONCLUIDO\",\r
+
+    \  \"pontuacao\": 100,\r
+
+    \  \"tentativas\": 1,\r
+
+    \  \"tempoGastoMinutos\": 12,\r
+
+    \  \"observacoes\": \"Paciente completou a atividade com ótimo desempenho e sem necessidade de auxílio.\"\r
+
+    }"
+order: 4490605503161998

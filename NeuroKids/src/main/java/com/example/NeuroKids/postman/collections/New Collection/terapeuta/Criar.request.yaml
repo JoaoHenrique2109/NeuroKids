@@ -1,0 +1,24 @@
+$kind: http-request
+name: Criar
+url: http://localhost:8080/terapeutas
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Patrick\",\r
+
+    \   \"terapeutaId\": 2,\r
+
+    \  \"email\": \"Patrick@email.com\",\r
+
+    \  \"telefone\": \"81952632144\",\r
+
+    \  \"registroProfissional\": \"gne2356\",\r
+
+    \  \"especialidade\": \"PSICOLOGO\",\r
+
+    \  \"abordagemTerapeutica\": \"Fobia social\"\r
+
+    }"
+order: 860229163588198

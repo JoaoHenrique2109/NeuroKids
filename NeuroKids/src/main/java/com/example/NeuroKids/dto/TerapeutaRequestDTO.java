@@ -25,5 +25,8 @@ public class TerapeutaRequestDTO {
     @NotNull(message = "Especialidade é obrigatória")
     private Especialidade especialidade;
 
+    @NotNull(message = "Terapeuta é obrigatório")
+    private Long terapeutaId;
+
     private String abordagemTerapeutica;
 }

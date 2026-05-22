@@ -1,0 +1,5 @@
+$kind: http-request
+name: Buscar
+url: http://localhost:8080/progressos
+method: GET
+order: 4481548450124809

@@ -1,0 +1,5 @@
+$kind: http-request
+name: Deletar
+url: http://localhost:8080/atividades/5
+method: DELETE
+order: 3996884298408271

@@ -1,0 +1,5 @@
+$kind: http-request
+name: Buscar
+url: http://localhost:8080/terapeutas/1
+method: GET
+order: 767748375842176

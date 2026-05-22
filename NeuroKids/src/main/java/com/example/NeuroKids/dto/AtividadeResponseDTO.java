@@ -23,16 +23,6 @@ public class AtividadeResponseDTO {
 
     private Dificuldade dificuldade;
 
-    private Integer duracaoMinutos;
-
-    private String faixaEtaria;
-
-    private String indicadaPara;
-
-    private String urlImagem;
-
-    private Boolean ativa;
-
     private Integer quantidadeProgressos;
 
     private LocalDateTime criadoEm;

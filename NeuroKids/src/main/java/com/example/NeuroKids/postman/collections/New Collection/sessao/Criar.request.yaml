@@ -1,0 +1,28 @@
+$kind: http-request
+name: Criar
+url: http://localhost:8080/sessoes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"pacienteId\": 1,\r
+
+    \  \"terapeutaId\": 1,\r
+
+    \  \"dataSessao\": \"2026-05-21\",\r
+
+    \  \"horaInicio\": \"10:00:00\",\r
+
+    \  \"tipo\": \"PRESENCIAL\",\r
+
+    \  \"status\": \"AGENDADA\",\r
+
+    \  \"relatoClinico\": \"pode apagar\",\r
+
+    \  \"metas\": \"Delete\",\r
+
+    \  \"evolucao\": \"string\"\r
+
+    }"
+order: 1870338010660233

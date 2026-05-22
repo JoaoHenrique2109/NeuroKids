@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:8080/comunicados
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"titulo\": \"Evolução na Comunicação\",\r
+
+    \  \"conteudo\": \"O paciente apresentou melhora significativa na interação social e respondeu bem às atividades de comunicação durante a sessão.\",\r
+
+    \  \"tipo\": \"RECADO\",\r
+
+    \  \"prioridade\": \"BAIXA\",\r
+
+    \  \"origem\": \"ESCOLA\",\r
+
+    \  \"pacienteId\": 1,\r
+
+    \  \"terapeutaId\": 1\r
+
+    }"
+order: 1779407959350

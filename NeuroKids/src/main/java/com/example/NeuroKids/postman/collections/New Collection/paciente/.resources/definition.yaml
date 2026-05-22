@@ -1,0 +1,7 @@
+$kind: collection
+name: paciente
+auth:
+  - id: 87a6b14d-3ced-432e-86c1-9bf2ea77cc4b
+    type: apikey
+    name: API Key
+order: 4421681056059070

@@ -21,7 +21,6 @@ public class AtividadeService {
     public AtividadeResponseDTO criar(
             AtividadeRequestDTO dto) {
 
-        validarDuracao(dto);
 
         Atividade atividade = Atividade.builder()
                 .titulo(dto.getTitulo())
@@ -29,10 +28,6 @@ public class AtividadeService {
                 .instrucoes(dto.getInstrucoes())
                 .tipo(dto.getTipo())
                 .dificuldade(dto.getDificuldade())
-                .duracaoMinutos(dto.getDuracaoMinutos())
-                .faixaEtaria(dto.getFaixaEtaria())
-                .indicadaPara(dto.getIndicadaPara())
-                .urlImagem(dto.getUrlImagem())
                 .criadoEm(LocalDateTime.now())
                 .atualizadoEm(LocalDateTime.now())
                 .ativa(true)
@@ -68,17 +63,12 @@ public class AtividadeService {
                 .orElseThrow(() ->
                         new RuntimeException("Atividade não encontrada"));
 
-        validarDuracao(dto);
 
         atividade.setTitulo(dto.getTitulo());
         atividade.setDescricao(dto.getDescricao());
         atividade.setInstrucoes(dto.getInstrucoes());
         atividade.setTipo(dto.getTipo());
         atividade.setDificuldade(dto.getDificuldade());
-        atividade.setDuracaoMinutos(dto.getDuracaoMinutos());
-        atividade.setFaixaEtaria(dto.getFaixaEtaria());
-        atividade.setIndicadaPara(dto.getIndicadaPara());
-        atividade.setUrlImagem(dto.getUrlImagem());
         atividade.setCriadoEm(LocalDateTime.now());
         atividade.setAtualizadoEm(LocalDateTime.now());
 
@@ -95,16 +85,7 @@ public class AtividadeService {
 
         atividadeRepository.save(atividade);
     }
-    @Transactional
-    private void validarDuracao(
-            AtividadeRequestDTO dto) {
 
-        if (dto.getDuracaoMinutos() != null
-                && dto.getDuracaoMinutos() <= 0) {
-
-            throw new RuntimeException("Duração deve ser maior que zero");
-        }
-    }
 
     private AtividadeResponseDTO converterParaDTO(Atividade atividade) {
 
@@ -115,14 +96,11 @@ public class AtividadeService {
                 .instrucoes(atividade.getInstrucoes())
                 .tipo(atividade.getTipo())
                 .dificuldade(atividade.getDificuldade())
-                .duracaoMinutos(
-                        atividade.getDuracaoMinutos())
-                .faixaEtaria(atividade.getFaixaEtaria())
-                .indicadaPara(atividade.getIndicadaPara())
-                .urlImagem(atividade.getUrlImagem())
-                .ativa(atividade.getAtiva())
+                .tipo(atividade.getTipo())
                 .quantidadeProgressos(
-                        atividade.getProgressos().size())
+                        atividade.getProgressos() != null
+                                ? atividade.getProgressos().size()
+                                : 0)
                 .criadoEm(atividade.getCriadoEm())
                 .build();
     }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,20 +28,56 @@ public class PacienteService {
     // CREATE
     @Transactional
     public PacienteResponseDTO criar(PacienteRequestDTO dto) {
-        //regra de negocio
+
         validarIdade(dto.getDataNascimento());
-        //busca responsavel
-        Responsavel responsavel = responsavelRepository.findById(dto.getResponsavelId())
-                .orElseThrow(() -> new RuntimeException("Responsável não encontrado"));
 
-        List<Terapeuta> terapeutas = terapeutaRepository
-                .findAllById(dto.getTerapeutasIds());
-        //if (!Boolean.TRUE.equals(responsavel.getAtivo())) {
-            //throw new BusinessException("O responsável informado está inativo.");}
+        Responsavel responsavel;
 
+        // Se não vier responsável, cria automático
+        if(dto.getResponsavelId() == null){
+
+            responsavel = Responsavel.builder()
+                    .nome("Responsável Padrão")
+                    .ativo(true)
+                    .build();
+
+            responsavel = responsavelRepository.save(responsavel);
+
+        }else{
+
+            responsavel = responsavelRepository
+                    .findById(dto.getResponsavelId())
+                    .orElseGet(() -> {
+
+                        Responsavel novo = Responsavel.builder()
+                                .nome("Responsável Automático")
+                                .ativo(true)
+                                .build();
+
+                        return responsavelRepository.save(novo);
+
+                    });
+
+        }
+
+        List<Terapeuta> terapeutas = new ArrayList<>();
+
+        if(dto.getTerapeutasId() != null
+                && !dto.getTerapeutasId().isEmpty()){
+
+            terapeutas = terapeutaRepository.findAllById(
+                    dto.getTerapeutasId()
+            );
+
+            System.out.println(
+                    "TERAPEUTAS ENCONTRADOS: "
+                            + terapeutas.size()
+            );
+        }
         Paciente paciente = Paciente.builder()
                 .nome(dto.getNome())
                 .dataNascimento(dto.getDataNascimento())
+                .idade(dto.getIdade())
                 .diagnostico(dto.getDiagnostico())
                 .necessidadesEspecificas(dto.getNecessidadesEspecificas())
                 .nivelSuporte(dto.getNivelSuporte())
@@ -49,9 +86,9 @@ public class PacienteService {
                 .ativo(true)
                 .build();
 
-        return converterParaDTO(
-                pacienteRepository.save(paciente)
-        );
+        Paciente salvo = pacienteRepository.save(paciente);
+
+        return converterParaDTO(salvo);
     }
 
     @Transactional
@@ -80,6 +117,8 @@ public class PacienteService {
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
         paciente.setNome(dto.getNome());
+        paciente.setDataNascimento(dto.getDataNascimento());
+        paciente.setIdade(dto.getIdade());
         paciente.setDiagnostico(dto.getDiagnostico());
         paciente.setNecessidadesEspecificas(dto.getNecessidadesEspecificas());
         paciente.setNivelSuporte(dto.getNivelSuporte());

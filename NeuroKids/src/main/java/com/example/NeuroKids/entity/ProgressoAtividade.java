@@ -2,13 +2,12 @@ package com.example.NeuroKids.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDateTime;
 
-/**
- * Entidade que registra o progresso de um paciente em uma atividade específica.
- * Funciona como tabela associativa entre Paciente e Atividade*/
 @Entity
-@Table(name = "progresso_atividades")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -50,22 +49,19 @@ public class ProgressoAtividade {
     private String observacoes;
 
     // Data e hora da última execução
+    @UpdateTimestamp
     @Column(name = "ultima_execucao")
     private LocalDateTime ultimaExecucao;
 
     // Data de conclusão definitiva
+
     @Column(name = "concluido_em")
     private LocalDateTime concluidoEm;
 
+    @CreationTimestamp
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
-    //salva a data automaticamente
-    @PrePersist
-    protected void onCreate() {
-        criadoEm = LocalDateTime.now();
-        ultimaExecucao = LocalDateTime.now();
-    }
 
     public enum StatusProgresso {
         NAO_INICIADO,

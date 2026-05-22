@@ -1,0 +1,20 @@
+$kind: http-request
+name: Atualizar
+url: http://localhost:8080/atividades/
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"titulo\": \"teste\",\r
+
+    \  \"descricao\": \"excluir\",\r
+
+    \  \"instrucoes\": \"pra nada\",\r
+
+    \  \"tipo\": \"JOGO\",\r
+
+    \  \"dificuldade\": \"DIFICIL\"\r
+
+    }"
+order: 3074748426748855

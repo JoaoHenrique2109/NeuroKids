@@ -16,16 +16,10 @@ public class SessaoResponseDTO {
     private Long id;
 
     private String paciente;
-
-    private String terapeuta;
-
+    private Long terapeutaId;
     private LocalDate dataSessao;
 
     private LocalTime horaInicio;
-
-    private LocalTime horaFim;
-
-    private Integer duracaoMinutos;
 
     private TipoSessao tipo;
 
@@ -37,7 +31,6 @@ public class SessaoResponseDTO {
 
     private String evolucao;
 
-    private String proximosPassos;
-
     private LocalDateTime criadoEm;
+    private LocalDate atualizadoEm;
 }

@@ -17,6 +17,9 @@ public class PacienteRequestDTO {
     @NotNull(message = "Data de nascimento é obrigatória")
     private LocalDate dataNascimento;
 
+    @NotNull(message = "idade é obrigatório")
+    private int idade;
+
     @NotBlank(message = "Diagnóstico é obrigatório")
     private String diagnostico;
 
@@ -28,5 +31,5 @@ public class PacienteRequestDTO {
     @NotNull(message = "Responsável é obrigatório")
     private Long responsavelId;
 
-    private List<Long> terapeutasIds;
+    private List<Long> terapeutasId;
 }

@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:8080/comunicados
+method: PUT
+order: 4464304703703840

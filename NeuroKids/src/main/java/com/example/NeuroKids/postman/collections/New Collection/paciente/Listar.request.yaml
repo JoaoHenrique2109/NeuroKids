@@ -1,0 +1,8 @@
+$kind: http-request
+name: Listar
+url: http://localhost:8080/pacientes
+method: GET
+body:
+  type: json
+  content: ""
+order: 1177184374818505

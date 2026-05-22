@@ -1,0 +1,19 @@
+$kind: http-request
+url: http://localhost:8080/responsavel
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Fernanda Lima\",\r
+
+    \  \"email\": \"fernanda.lima@gmail.com\",\r
+
+    \  \"telefone\": \"81966665555\",\r
+
+    \  \"cpf\": \"32165498700\",\r
+
+    \  \"parentesco\": \"TIO\"\r
+
+    }"
+order: 1779302997985

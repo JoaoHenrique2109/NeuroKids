@@ -16,6 +16,8 @@ public class PacienteResponseDTO {
 
     private String nome;
 
+    private int idade;
+
     private LocalDate dataNascimento;
 
     private String diagnostico;

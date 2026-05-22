@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:8080/comunicados/1
+method: GET
+order: 4242077713400615

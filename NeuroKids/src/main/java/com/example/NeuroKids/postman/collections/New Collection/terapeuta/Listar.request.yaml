@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:8080/terapeutas
+method: GET
+body:
+  type: json
+  content: ""
+order: 1779367932725

@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:8080/progressos/1
+method: DELETE
+order: 4498219076585135
