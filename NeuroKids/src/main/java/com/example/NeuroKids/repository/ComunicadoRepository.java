@@ -11,14 +11,14 @@ public interface ComunicadoRepository
 
     // QUERY NATIVA 16
     @Query(value = """
-            SELECT * FROM comunicados
+            SELECT * FROM comunicado
             WHERE visualizado = false
             """, nativeQuery = true)
     List<Comunicado> buscarNaoVisualizados();
 
     // QUERY NATIVA 17
     @Query(value = """
-            SELECT * FROM comunicados
+            SELECT * FROM comunicado
             WHERE prioridade = :prioridade
             """, nativeQuery = true)
     List<Comunicado> buscarPorPrioridade(
@@ -27,7 +27,7 @@ public interface ComunicadoRepository
 
     // QUERY NATIVA 18
     @Query(value = """
-            SELECT * FROM comunicados
+            SELECT * FROM comunicado
             WHERE paciente_id = :pacienteId
             """, nativeQuery = true)
     List<Comunicado> buscarPorPaciente(
@@ -36,7 +36,7 @@ public interface ComunicadoRepository
 
     // QUERY NATIVA 19
     @Query(value = """
-            SELECT * FROM comunicados
+            SELECT * FROM comunicado
             WHERE tipo = :tipo
             """, nativeQuery = true)
     List<Comunicado> buscarPorTipo(

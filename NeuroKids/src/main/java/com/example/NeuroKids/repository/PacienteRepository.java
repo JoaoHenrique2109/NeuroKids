@@ -20,19 +20,32 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     List<Paciente> findByDiagnosticoContainingIgnoreCase(String diagnostico);
 
 
-    @Query("SELECT p FROM Paciente p WHERE p.responsavel.id = :responsavelId AND p.ativo = true")
-    List<Paciente> findPacientesAtivosByResponsavel(@Param("responsavelId") Long responsavelId);
+    @Query(value = """
+        SELECT *
+        FROM paciente p
+        WHERE p.responsavel_id = :responsavelId
+          AND p.ativo = 1
+        """, nativeQuery = true)
+    List<Paciente> findPacientesAtivosByResponsavel(
+            @Param("responsavelId") Long responsavelId);
 
 
-    @Query("SELECT p FROM Paciente p JOIN p.terapeutas t WHERE t.id = :terapeutaId AND p.ativo = true")
-    List<Paciente> findPacientesByTerapeuta(@Param("terapeutaId") Long terapeutaId);
-
+    @Query(value = """
+        SELECT p.*
+        FROM paciente p
+        INNER JOIN paciente_terapeuta pt
+            ON p.id = pt.paciente_id
+        WHERE pt.terapeuta_id = :terapeutaId
+          AND p.ativo = 1
+        """, nativeQuery = true)
+    List<Paciente> findPacientesByTerapeuta(
+            @Param("terapeutaId") Long terapeutaId);
 
 
     @Query(value = """
             SELECT p.id, p.nome, p.diagnostico,
                    COUNT(pa.id) AS total_atividades_concluidas
-            FROM pacientes p
+            FROM paciente p
             LEFT JOIN progresso_atividades pa ON pa.paciente_id = p.id
                 AND pa.status = 'CONCLUIDO'
             WHERE p.ativo = 1
@@ -45,8 +58,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     @Query(value = """
             SELECT p.id, p.nome, p.diagnostico, MAX(pa.ultima_execucao) AS ultima_atividade
-            FROM pacientes p
-            LEFT JOIN progresso_atividades pa ON pa.paciente_id = p.id
+            FROM paciente p
+            LEFT JOIN progresso_atividade pa ON pa.paciente_id = p.id
             WHERE p.ativo = 1
             GROUP BY p.id, p.nome, p.diagnostico
             HAVING ultima_atividade IS NULL
@@ -56,8 +69,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
    // busca por nome do paciente na lista geral
     @Query(value = """
-            SELECT p.* FROM pacientes p
-            INNER JOIN responsaveis r ON r.id = p.responsavel_id
+            SELECT p.* FROM paciente p
+            INNER JOIN responsavei r ON r.id = p.responsavel_id
             WHERE p.ativo = 1
               AND (p.nome LIKE CONCAT('%', :termo, '%')
                OR r.nome LIKE CONCAT('%', :termo, '%'))

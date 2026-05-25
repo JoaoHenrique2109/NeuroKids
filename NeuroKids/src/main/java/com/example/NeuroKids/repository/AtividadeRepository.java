@@ -10,19 +10,19 @@ public interface AtividadeRepository
         extends JpaRepository<Atividade, Long> {
 
     @Query(value = """
-            SELECT * FROM atividades
+            SELECT * FROM atividade
             WHERE ativa = true
             """, nativeQuery = true)
     List<Atividade> buscarAtividadesAtivas();
 
     @Query(value = """
-            SELECT * FROM atividades
+            SELECT * FROM atividade
             WHERE dificuldade = :dificuldade
             """, nativeQuery = true)
     List<Atividade> buscarPorDificuldade(String dificuldade);
 
     @Query(value = """
-            SELECT * FROM atividades
+            SELECT * FROM atividade
             WHERE tipo = :tipo
             """, nativeQuery = true)
     List<Atividade> buscarPorTipo(String tipo);
