@@ -25,6 +25,7 @@ public class ResponsavelResponseDTO {
 
     private Boolean ativo;
 
+
     private List<String> pacientes;
 
     private LocalDateTime criadoEm;

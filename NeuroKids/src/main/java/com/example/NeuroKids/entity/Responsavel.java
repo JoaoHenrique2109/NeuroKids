@@ -52,6 +52,7 @@ public class Responsavel {
 
     // Um responsável pode ter múltiplos filhos na plataforma
     @JsonIgnore
+    @Builder.Default
     @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL)
     private List<Paciente> pacientes = new ArrayList<>();
 

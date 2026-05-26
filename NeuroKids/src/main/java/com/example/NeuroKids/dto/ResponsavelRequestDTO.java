@@ -1,5 +1,6 @@
 package com.example.NeuroKids.dto;
 
+import com.example.NeuroKids.entity.Paciente;
 import com.example.NeuroKids.entity.Responsavel.Parentesco;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -24,4 +25,6 @@ public class ResponsavelRequestDTO {
 
     @NotNull(message = "Parentesco é obrigatório")
     private Parentesco parentesco;
+
+
 }

@@ -11,7 +11,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface ResponsavelRepository extends JpaRepository<Responsavel, Long> {
+public interface
+ResponsavelRepository extends JpaRepository<Responsavel, Long> {
 
 
     Optional<Responsavel> findByEmail(String email);
